@@ -1,0 +1,12 @@
+[submodule "Assets/Commons/Debug"]
+	path = Assets/Commons/Debug
+	url = git@bitbucket.org:hsandt/unity-commons-debug
+[submodule "Assets/Commons/Editor"]
+	path = Assets/Commons/Editor
+	url = git@bitbucket.org:hsandt/unity-commons-editor
+[submodule "Assets/Commons/Helper"]
+	path = Assets/Commons/Helper
+	url = git@bitbucket.org:hsandt/unity-commons-helper
+[submodule "Assets/Commons/Pattern"]
+	path = Assets/Commons/Pattern
+	url = git@bitbucket.org:hsandt/unity-commons-pattern
