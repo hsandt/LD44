@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: c4f5cc45b16379fd3b9942a65c928deb
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cupcake Party
+  fontNames:
+  - Cupcake Party
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 51811b8fa22fa6bd4a0f2ece05dcd7d2, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
