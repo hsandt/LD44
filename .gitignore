@@ -1,0 +1,94 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+/Library/
+/Logs/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# ====================== #
+# Sublime Text generated #
+# ====================== #
+*.sublime-workspace
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+# Commented, as it also hid Fungus/EditorResources/Icons folder
+#Icon?
+ehthumbs.db
+Thumbs.db
+
+# ============== #
+# tk2d generated #
+# ============== #
+Assets/-tk2d.*
+Assets/Resources/tk2d/*
+Assets/Resources/tk2d.meta
+
+# ======================== #
+# UnityTestTools generated #
+# ======================== #
+*TestResults.xml
+*TestResults.xml.meta
+
+# ============== #
+# Custom folders #
+# ============== #
+/Build
+/Backup
+/.project
+
+# =============== #
+# JetBrains Rider #
+# =============== #
+# Reference: https://github.com/JetBrains/resharper-rider-samples/blob/master/.gitignore
+
+# Common IntelliJ Platform excludes
+
+# User specific
+**/.idea/**/workspace.xml
+**/.idea/**/tasks.xml
+**/.idea/shelf/*
+**/.idea/dictionaries
+
+# Sensitive or high-churn files
+**/.idea/**/dataSources/
+**/.idea/**/dataSources.ids
+**/.idea/**/dataSources.xml
+**/.idea/**/dataSources.local.xml
+**/.idea/**/sqlDataSources.xml
+**/.idea/**/dynamic.xml
+
+# Rider
+# Rider auto-generates .iml files, and contentModel.xml
+**/.idea/**/*.iml
+**/.idea/**/contentModel.xml
+**/.idea/**/modules.xml
+
+# Rider-Unity bridge DLL and its .meta (Rider takes care of adding and updating it locally,
+# but add a .dummy to preserve folder)
+/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll*
+
+[Bb]in/
+[Oo]bj/
