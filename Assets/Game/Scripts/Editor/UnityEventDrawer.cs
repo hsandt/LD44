@@ -266,6 +266,13 @@ public class UnityEventDrawer : PropertyDrawer
         }
         else if (modeEnum != PersistentListenerMode.Void && modeEnum != PersistentListenerMode.EventDefined)
         {
+            // Note that llamagod was also checking for !argument.serializedObject.isEditingMultipleObjects
+            // as it wasn't supported. But now it seems to work.
+            
+            // If you have issues with multiple edit on EnumAction callbacks, add a check on this, but not in the else if
+            // above (which would also prevent showing a normal PropertyField), rather inside this block, falling back to
+            // normal PropertyField when editing multiple objects.
+            
             // Try to find Find the EnumActionAttribute
             var method = GetMethod(m_DummyEvent, methodName.stringValue, listenerTarget.objectReferenceValue, GetMode(mode), desiredType);
             object[] attributes = null;
