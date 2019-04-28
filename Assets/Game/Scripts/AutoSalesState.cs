@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 using CommonsPattern;
@@ -7,12 +8,21 @@ using CommonsPattern;
 public class AutoSalesState : PhaseState
 {
     public override PhaseKey Key {
-        get { return PhaseKey.ItemSetup; }
+        get { return PhaseKey.AutoSales; }
+    }
+    
+    public AutoSalesState()
+    {
+        allowedPreviousStates = new HashSet<PhaseKey>
+        {
+            PhaseKey.ItemSetup
+        };
     }
 
     public override void OnEnterFrom(PhaseState previousState)
     {
         base.OnEnterFrom(previousState);
+        Debug.Log("Entering AutoSales phase");
     }
 
     public override void UpdateState()

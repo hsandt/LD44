@@ -7,7 +7,15 @@ using CommonsPattern;
 public class AutoSalesResultState : PhaseState
 {
     public override PhaseKey Key {
-        get { return PhaseKey.ItemSetup; }
+        get { return PhaseKey.AutoSalesResult; }
+    }
+
+    public AutoSalesResultState()
+    {
+        allowedPreviousStates = new HashSet<PhaseKey>
+        {
+            PhaseKey.AutoSales
+        };
     }
 
     public override void OnEnterFrom(PhaseState previousState)

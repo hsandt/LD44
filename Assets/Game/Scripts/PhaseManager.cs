@@ -26,4 +26,10 @@ public class PhaseManager : SingletonManager<PhaseManager>
     void Clear () {
         m_FSM.Clear();
     }
+
+    [EnumAction(typeof(PhaseKey))]
+    public void GoToPhase(int phaseIndex)
+    {
+        m_FSM.SetNextStateByKey((PhaseKey)phaseIndex);
+    }    
 }

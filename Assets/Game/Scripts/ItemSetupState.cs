@@ -9,6 +9,14 @@ public class ItemSetupState : PhaseState
     public override PhaseKey Key {
         get { return PhaseKey.ItemSetup; }
     }
+    
+    public ItemSetupState()
+    {
+        allowedPreviousStates = new HashSet<PhaseKey>
+        {
+            PhaseKey.None
+        };
+    }
 
     public override void OnEnterFrom(PhaseState previousState)
     {
