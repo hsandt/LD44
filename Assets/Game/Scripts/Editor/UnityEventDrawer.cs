@@ -266,7 +266,24 @@ namespace UnityEditorInternal
                     argument.objectReferenceValue = result;
             }
             else if (modeEnum != PersistentListenerMode.Void && modeEnum != PersistentListenerMode.EventDefined)
-                EditorGUI.PropertyField(argRect, argument, GUIContent.none);
+            {
+                // Try to find Find the EnumActionAttribute
+                var method = GetMethod(m_DummyEvent, methodName.stringValue, listenerTarget.objectReferenceValue, GetMode(mode), desiredType);
+                object[] attributes = null;
+                if (method != null)
+                    attributes = method.GetCustomAttributes(typeof(EnumActionAttribute), true);
+                if (attributes != null && attributes.Length > 0)
+                {
+                    // Make an enum popup
+                    var enumType = ((EnumActionAttribute)attributes[0]).enumType;
+                    var value = (Enum)Enum.ToObject(enumType, argument.intValue);
+                    argument.intValue = Convert.ToInt32(EditorGUI.EnumPopup(argRect, value));
+                }
+                else
+                {
+                    EditorGUI.PropertyField(argRect, argument, GUIContent.none);
+                }
+            }
 
             using (new EditorGUI.DisabledScope(listenerTarget.objectReferenceValue == null))
             {
