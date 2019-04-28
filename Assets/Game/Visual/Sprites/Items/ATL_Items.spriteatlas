@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ATL_Store
+  m_Name: ATL_Items
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -30,27 +30,23 @@ SpriteAtlas:
       enableTightPacking: 1
     variantMultiplier: 1
     packables:
-    - {fileID: 102900000, guid: 57aea3f7ae3f7977bb73221079feddd9, type: 3}
-    totalSpriteSurfaceArea: 4954593
+    - {fileID: 102900000, guid: b9d4ed48610e159f2865a28dc118379a, type: 3}
+    totalSpriteSurfaceArea: 96
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 2ddba812a8bf77b23b7639e321c66975, type: 3}
-  - {fileID: 21300000, guid: f1f26832e4b29b7b5be60b21d0662a6f, type: 3}
-  - {fileID: 21300000, guid: e520004394a48fe178dcd7cc8ce21fc5, type: 3}
-  - {fileID: 21300000, guid: b17dc1531fa7cddfe91175de4faf48f9, type: 3}
-  - {fileID: 21300000, guid: 90514ba32609d77ac9b65cb0de8e1cd6, type: 3}
-  - {fileID: 21300000, guid: 1115e44ed85f3da94a5e78b07d870fee, type: 3}
-  - {fileID: 21300000, guid: 104a747fb04c2fcb283c94c9626ddaef, type: 3}
-  - {fileID: 21300000, guid: 036b82afdde80dcba90c14030dd38948, type: 3}
+  - {fileID: 21300000, guid: 4fd87557f164ea81487dc08105748d34, type: 3}
+  - {fileID: 21300000, guid: 6be693b971e5a55528e45a774323ab6e, type: 3}
+  - {fileID: 21300000, guid: ddb615cdd78b384708aa5e26eba0535c, type: 3}
+  - {fileID: 21300000, guid: fac7204e8db3976bb802055061b3f0e3, type: 3}
+  - {fileID: 21300000, guid: 4ef40dfec2ef8129fac8d7eec1d7fa8a, type: 3}
+  - {fileID: 21300000, guid: 79284d9f413e5471a9eb0763162effa4, type: 3}
   m_PackedSpriteNamesToIndex:
-  - Mockup_Store
-  - SPR_Shelve1
-  - SPR_Street
-  - BG_Store
-  - SPR_Front
-  - SPR_Shelve2
-  - SPR_Slot
-  - SPR_Counter
-  m_Tag: ATL_Store
+  - Square
+  - Hexagon
+  - Circle
+  - Diamond
+  - Polygon
+  - Triangle
+  m_Tag: ATL_Items
   m_IsVariant: 0

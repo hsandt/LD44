@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Presets:
   - m_Name: 
+    m_Color: {r: 1, g: 1, b: 1, a: 1}
+  - m_Name: 
     m_Color: {r: 0.5019608, g: 0, b: 0.5019608, a: 1}
   - m_Name: 
     m_Color: {r: 0, g: 0.5019608, b: 0, a: 1}
@@ -32,10 +34,12 @@ MonoBehaviour:
   - m_Name: 
     m_Color: {r: 0, g: 0, b: 0.5019608, a: 1}
   - m_Name: 
-    m_Color: {r: 1, g: 1, b: 0.5019608, a: 1}
-  - m_Name: 
     m_Color: {r: 1, g: 0, b: 0, a: 1}
   - m_Name: 
     m_Color: {r: 0.5019608, g: 0.5019608, b: 0, a: 1}
   - m_Name: 
     m_Color: {r: 0.5019608, g: 1, b: 0, a: 1}
+  - m_Name: 
+    m_Color: {r: 1, g: 1, b: 0.5019608, a: 1}
+  - m_Name: 
+    m_Color: {r: 1, g: 1, b: 0.6320754, a: 1}
