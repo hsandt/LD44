@@ -30,7 +30,7 @@ using UnityEngine.Events;
 using Object = UnityEngine.Object;
 using UnityEditorInternal;
 
-[CustomPropertyDrawer(typeof(UnityEventBase), true)]
+[CustomPropertyDrawer(typeof(UnityEvent), true)]
 public class UnityEventDrawer : PropertyDrawer
 {
     protected class State
