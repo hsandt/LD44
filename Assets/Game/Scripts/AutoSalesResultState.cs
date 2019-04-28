@@ -6,9 +6,7 @@ using CommonsPattern;
 
 public class AutoSalesResultState : PhaseState
 {
-    public override PhaseKey Key {
-        get { return PhaseKey.AutoSalesResult; }
-    }
+    public override PhaseKey Key => PhaseKey.AutoSalesResult;
 
     public AutoSalesResultState()
     {

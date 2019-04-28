@@ -7,10 +7,8 @@ using CommonsPattern;
 
 public class AutoSalesState : PhaseState
 {
-    public override PhaseKey Key {
-        get { return PhaseKey.AutoSales; }
-    }
-    
+    public override PhaseKey Key => PhaseKey.AutoSales;
+
     public AutoSalesState()
     {
         allowedPreviousStates = new HashSet<PhaseKey>

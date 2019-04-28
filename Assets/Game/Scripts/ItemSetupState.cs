@@ -6,10 +6,8 @@ using CommonsPattern;
 
 public class ItemSetupState : PhaseState
 {
-    public override PhaseKey Key {
-        get { return PhaseKey.ItemSetup; }
-    }
-    
+    public override PhaseKey Key => PhaseKey.ItemSetup;
+
     public ItemSetupState()
     {
         allowedPreviousStates = new HashSet<PhaseKey>
