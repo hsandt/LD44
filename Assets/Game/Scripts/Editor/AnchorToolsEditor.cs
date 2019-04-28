@@ -11,14 +11,41 @@ using UnityEngine;
 [InitializeOnLoad]
 public class AnchorToolsEditor : EditorWindow
 {
-    static AnchorToolsEditor()
+    /// When true make the anchors match the rect boundaries after a rect resize
+    private bool stickAnchorsToRect = false;
+        
+    AnchorToolsEditor()
     {
         SceneView.onSceneGUIDelegate += OnScene;
     }
-
-    private static void OnScene(SceneView sceneview)
+    
+    [MenuItem("Tools/Anchor Tools")]
+    static void Init()
     {
-        if (Event.current.type == EventType.MouseUp && Event.current.button == 0)
+        AnchorToolsEditor editorScreenshot = GetWindow<AnchorToolsEditor>(title: "Anchor Tools");
+
+        if (EditorPrefs.HasKey("AnchorToolsEditor.screenshotFolderPath"))
+            editorScreenshot.stickAnchorsToRect = EditorPrefs.GetBool("AnchorToolsEditor.stickAnchorsToRect");
+    }
+    
+    void OnGUI()
+    {
+        EditorGUI.BeginChangeCheck();
+
+        stickAnchorsToRect = EditorGUILayout.Toggle("Stick Anchors to Rect", stickAnchorsToRect);
+
+        if (EditorGUI.EndChangeCheck()) {
+            EditorPrefs.SetBool("AnchorToolsEditor.stickAnchorsToRect", stickAnchorsToRect);
+        }
+
+        if (GUILayout.Button("Stick Anchors to Rect")) UpdateAnchors();
+    }
+
+    private void OnScene(SceneView sceneView)
+    {
+        // detect mouse up button as a resize event; this is not accurate as other actions may be used,
+        // and we may modify the rect by inputting values with the keyboard, but works for quick usage
+        if (stickAnchorsToRect && Event.current.type == EventType.MouseUp && Event.current.button == 0)
         {
             UpdateAnchors();
         }
@@ -44,7 +71,6 @@ public class AnchorToolsEditor : EditorWindow
         TryToGetRectTransform();
         if (currentRectTransform != null && parentRectTransform != null && ShouldStick())
         {
-            //Debug.Log("[Anchors Tools] Updating");
             Stick();
         }
     }
@@ -77,9 +103,23 @@ public class AnchorToolsEditor : EditorWindow
 
     static private void TryToGetRectTransform()
     {
-        currentRectTransform = UnityEditor.Selection.activeGameObject.GetComponent<RectTransform>();
-        parentRectTransform = currentRectTransform.parent.gameObject.GetComponent<RectTransform>();
-
+        if (Selection.activeGameObject != null)
+        {
+            currentRectTransform = Selection.activeGameObject.GetComponent<RectTransform>();
+            if (currentRectTransform != null && currentRectTransform.parent != null)
+            {
+                parentRectTransform = currentRectTransform.parent.GetComponent<RectTransform>();
+            }
+            else
+            {
+                parentRectTransform = null;
+            }
+        }
+        else
+        {
+            currentRectTransform = null;
+            parentRectTransform = null;
+        }
     }
 
     static private void CalculateCurrentXY()
