@@ -2,5 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/Commons/Debug" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/Commons/Editor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/Commons/Helper" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/Commons/Pattern" vcs="Git" />
   </component>
 </project>

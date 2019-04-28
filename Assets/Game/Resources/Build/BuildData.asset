@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91abe10e8f3ac78479c484efeb67e89d, type: 3}
   m_Name: BuildData
   m_EditorClassIdentifier: 
-  appName: LD 44
+  appName: LD44_AFamilyBusiness
   majorVersion: 0
   minorVersion: 0
   stageVersion: 1
