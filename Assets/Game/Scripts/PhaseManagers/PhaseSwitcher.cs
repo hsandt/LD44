@@ -49,7 +49,7 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
     {
         // mirror FSM by activating initial phase manager, but only this one
         DeactivateAllPhaseManagers();
-        SwitchToPhaseManager(PhaseKey.ItemSetup);
+        SwitchToPhaseManager(PhaseKey.Delivery);
     }
 
     void FixedUpdate () {

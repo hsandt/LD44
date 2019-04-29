@@ -23,6 +23,11 @@ public class InventoryView : MonoBehaviour
     [Tooltip("Inventory Grid")]
     public Transform grid;
     
+    
+    /* State */
+    
+    private bool dirty = false;
+    
     void OnEnable()
     {
         model.ChangeEvent += OnInventoryChanged;
@@ -35,8 +40,24 @@ public class InventoryView : MonoBehaviour
             model.ChangeEvent -= OnInventoryChanged;
         }
     }
-    
-    private void OnInventoryChanged(Item[] newItems)
+
+    private void OnInventoryChanged()
+    {
+        // do not update view immediately, as it would be expensive if items are added
+        // inside a loop
+        dirty = true;
+    }
+
+    private void Update()
+    {
+        if (dirty)
+        {
+            dirty = false;
+            UpdateView();
+        }
+    }
+
+    private void UpdateView()
     {
         // OPTIMIZATION: for now we don't care about optimize adding just one or removing one item,
         // so we rebuild the view completely (it's fine on Start, but may be nice to change for delta ops)
@@ -50,10 +71,13 @@ public class InventoryView : MonoBehaviour
         }
         
         // fill grid layout with all items with non-0 quantity
-        foreach (Item item in newItems)
+        foreach (Item item in model.Items)
         {
-            ItemView view = itemViewPrefab.InstantiateUnder(grid).GetComponentOrFail<ItemView>();
-            view.AssignModel(item);
+            if (item.Quantity > 0)
+            {
+                ItemView view = itemViewPrefab.InstantiateUnder(grid).GetComponentOrFail<ItemView>();
+                view.AssignModel(item);
+            }
         }
     }
 }

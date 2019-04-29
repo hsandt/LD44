@@ -38,10 +38,11 @@ public class ItemView : MonoBehaviour
         model.ExposeEvent += OnItemExposed;
         
         // prevent interactions when none in stock
-        if (model.Quantity == 0)
-        {
-            button.interactable = false;
-        }
+        // for now we don't display such items anyway
+//        if (model.Quantity == 0)
+//        {
+//            button.interactable = false;
+//        }
     }
 
     void OnEnable()

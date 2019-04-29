@@ -8,11 +8,13 @@ using CommonsHelper;
 
 public class Inventory : MonoBehaviour
 {
-    public delegate void ChangeHandler(Item[] newItems);
+    public delegate void ChangeHandler();
     public event ChangeHandler ChangeEvent;
         
     [SerializeField, ReadOnlyField, Tooltip("Array of all items that can be possessed (some may have quantity 0)")]
     private Item[] items = null;
+
+    public Item[] Items => items;
     
     void Awake()
     {
@@ -42,7 +44,7 @@ public class Inventory : MonoBehaviour
 
     private void OnChanged()
     {
-        ChangeEvent?.Invoke(items);
+        ChangeEvent?.Invoke();
     }
 
     public void IncreaseItemQuantity(string itemName, int addedQuantity)
@@ -51,6 +53,7 @@ public class Inventory : MonoBehaviour
          if (itemToIncrease != null)
          {
              itemToIncrease.IncreaseQuantity(addedQuantity);
+             OnChanged();
          }
          else
          {
