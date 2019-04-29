@@ -14,19 +14,26 @@ public class Item
     /* Parameters */
     
     private ItemData data;
-    
-    
+    public ItemData Data => data;
+
+
     /* State */
     
     [SerializeField, ReadOnlyField, Tooltip("Current state")]
     private ItemState state;
 
-    public int Quantity => state.quantity;
     
+    public int Quantity => state.quantity;
+
     public Item(ItemData data)
     {
         this.data = data;
         state = new ItemState(0);
+    }
+
+    public void IncreaseQuantity(int addedQuantity)
+    {
+        state.quantity += addedQuantity;
     }
     
     /// Expose this item in the next free slot available.

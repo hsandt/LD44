@@ -44,4 +44,17 @@ public class Inventory : MonoBehaviour
     {
         ChangeEvent?.Invoke(items);
     }
+
+    public void IncreaseItemQuantity(string itemName, int addedQuantity)
+    {
+         Item itemToIncrease = items.FirstOrDefault(item => item.Data.itemName == itemName);
+         if (itemToIncrease != null)
+         {
+             itemToIncrease.IncreaseQuantity(addedQuantity);
+         }
+         else
+         {
+             Debug.LogErrorFormat("No item found with name {0}, cannot Increase Item Quantity.", itemName);
+         }
+    }
 }
