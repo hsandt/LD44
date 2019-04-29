@@ -56,8 +56,11 @@ public class DeliveryManager : PhaseManager<DeliveryManager>
             // stop interactions until next time
             inventoryView.SetAllowInteractions(false);
         }
-        
-        TutorialManager.Instance.HideTutorial();
+
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.HideTutorial();
+        }
     }
 
     public void AddDeliveryOrder(List<DeliveryOrder.SingleItemOrder> newItemOrders)

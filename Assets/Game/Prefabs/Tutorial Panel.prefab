@@ -98,7 +98,7 @@ MonoBehaviour:
   - These new items are now yours. Click the <i>Set up items</i> button when you're
     ready.
   - Before the customers arrive, place items from your inventory to free slots in
-    the sore by clicking on them.
+    the store by clicking on them.
   - Good! The item just behind the glass in the Front Display item. Depending on its
     nature, it will attract certain types of customers, so try different ones!
   - You can also click on items placed on slots to pull them back to the inventory.
@@ -106,8 +106,8 @@ MonoBehaviour:
   - Well, the developer didn't have enough time to make the next phase, so this is
     the end of this tutorial and of this demo. Thank you for playing!
   buttonContinue: {fileID: 1875950068476038742}
-  buttonOpenStore: {fileID: 0}
   deliveryDirector: {fileID: 0}
+  itemSetupDirector: {fileID: 0}
 --- !u!1 &1875950068120643929
 GameObject:
   m_ObjectHideFlags: 0

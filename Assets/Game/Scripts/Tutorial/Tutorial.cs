@@ -35,7 +35,7 @@ public class Tutorial : MonoBehaviour
         "These new items are now yours. Click the <i>Set up items</i> button when you're ready.",
         // ItemSetup
         "Before the customers arrive, place items from your inventory to " +
-        "free slots in the sore by clicking on them.",
+        "free slots in the store by clicking on them.",
         // ItemSetupFront
         "Good! The item just behind the glass in the Front Display item. " +
         "Depending on its nature, it will attract certain types of customers, so try different ones!",
