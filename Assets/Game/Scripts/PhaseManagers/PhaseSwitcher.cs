@@ -2,6 +2,8 @@
 using CommonsPattern;
 using UnityEngine;
 
+// SEO: before any Phase Manager, to avoid having an extra OnEnable call on each of them
+// before they are all deactivated during initialization
 public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
 {
     protected PhaseSwitcher () {}
@@ -43,13 +45,12 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
     private GameObject currentPhaseManager = null;
         
     void Init () {
+        DeactivateAllPhaseManagers();
+        SwitchToPhaseManager(PhaseKey.Delivery);
     }
 
     void Start ()
     {
-        // mirror FSM by activating initial phase manager, but only this one
-        DeactivateAllPhaseManagers();
-        SwitchToPhaseManager(PhaseKey.Delivery);
     }
 
     void FixedUpdate () {
