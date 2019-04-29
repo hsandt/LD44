@@ -11,8 +11,6 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
         Init();
     }
     
-    private FSMMachine<PhaseKey, PhaseState> m_FSM;
-        
     [Tooltip("Item Setup Manager root")]
     public GameObject itemSetupManager;
 
@@ -40,28 +38,19 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
     private GameObject currentPhaseManager = null;
         
     void Init () {
-        m_FSM = new FSMMachine<PhaseKey, PhaseState>();
-        m_FSM.AddState(new ItemSetupState());
-        m_FSM.AddState(new AutoSalesState());;
-        m_FSM.AddState(new AutoSalesResultState());;
-        m_FSM.SetDefaultStateByKey(PhaseKey.ItemSetup);
     }
 
     void Start ()
     {
-        m_FSM.Setup();
-
         // mirror FSM by activating initial phase manager, but only this one
         DeactivateAllPhaseManagers();
         SwitchToPhaseManager(PhaseKey.ItemSetup);
     }
 
     void FixedUpdate () {
-        m_FSM.UpdateMachine();
     }
     
     void Clear () {
-        m_FSM.Clear();
     }
     
     private void DeactivateAllPhaseManagers()
@@ -80,11 +69,6 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
     public void GoToPhase(int phaseIndex)
     {
         PhaseKey key = (PhaseKey) phaseIndex;
-        
-        // custom FSM
-        m_FSM.SetNextStateByKey(key);
-        
-        // Unity MonoBehaviour on root game object
         SwitchToPhaseManager(key);
     }
 
