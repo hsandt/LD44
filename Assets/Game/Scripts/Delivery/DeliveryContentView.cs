@@ -20,10 +20,15 @@ public class DeliveryContentView : MonoBehaviour
             header.text = "Delivery has arrived!";
 
             StringBuilder sb = new StringBuilder();
-            foreach (var itemOrder in order)
+            for (int i = 0; i < order.Count; ++i)
             {
+                var itemOrder = order[i];
                 sb.AppendFormat("{0}\t+{1}", itemOrder.itemData.itemName, itemOrder.quantity);
-                sb.AppendLine();
+                if (i + 1 < order.Count)
+                {
+                    // extra line if there is another item afterward
+                    sb.AppendLine();
+                }
             }
             content.text = sb.ToString();
         }

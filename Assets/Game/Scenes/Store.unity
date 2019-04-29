@@ -2866,7 +2866,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "+2\tItem0\n+4\tItem1\n+3\tItem2"
+  m_text: "Item0\t+2\nItem1\t+4\nItem2\t+3"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2938,7 +2938,7 @@ MonoBehaviour:
     characterCount: 26
     spriteCount: 0
     spaceCount: 5
-    wordCount: 7
+    wordCount: 6
     linkCount: 0
     lineCount: 3
     pageCount: 1
