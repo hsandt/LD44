@@ -104,7 +104,7 @@ MonoBehaviour:
   - You can also click on items placed on slots to pull them back to the inventory.
     When you're ready, click on <i>Open Store</i>
   - Well, the developer didn't have enough time to make the next phase, so this is
-    the end of this tutorial and of this demo. Thank you for playing!
+    the end of this tutorial and demo. Thank you for playing!
   buttonContinue: {fileID: 1875950068476038742}
   deliveryDirector: {fileID: 0}
   itemSetupDirector: {fileID: 0}
