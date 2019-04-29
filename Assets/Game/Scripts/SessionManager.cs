@@ -17,6 +17,6 @@ public class SessionManager : MonoBehaviour
     void Setup()
     {
         // Deliver initial set of items
-        DeliveryManager.Instance.DeliverOrder(initialItemOrders);
+        DeliveryManager.Instance.AddDeliveryOrder(initialItemOrders);
     }
 }

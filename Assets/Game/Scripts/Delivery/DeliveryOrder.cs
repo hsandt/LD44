@@ -8,7 +8,7 @@ using CommonsHelper;
 public class DeliveryOrder : MonoBehaviour
 {
     [Serializable]
-    public class SingleItemOrder
+    public struct SingleItemOrder
     {
         public ItemData itemData;
         public int quantity;
@@ -21,6 +21,11 @@ public class DeliveryOrder : MonoBehaviour
     public void AddItemOrder(ItemData itemData, int quantity)
     {
         itemOrders.Add(new SingleItemOrder{itemData = itemData, quantity = quantity});
+    }
+
+    public void AddItemOrders(List<SingleItemOrder> newItemOrders)
+    {
+        itemOrders.AddRange(newItemOrders);
     }
 
     /// Call when order has been taken into account

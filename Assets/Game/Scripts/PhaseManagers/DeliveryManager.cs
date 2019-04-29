@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Playables;
 
 using CommonsPattern;
+using TMPro;
+using UnityEngine.Serialization;
 
 public class DeliveryManager : SingletonManager<DeliveryManager>
 {
@@ -15,16 +17,20 @@ public class DeliveryManager : SingletonManager<DeliveryManager>
         Init();
     }
     
+    [FormerlySerializedAs("deliveryOrder")]
     [Header("External scene references")]
     
     [Tooltip("Next Delivery Order")]
-    public DeliveryOrder deliveryOrder;
+    public DeliveryOrder nextDeliveryOrder;
     
     [Tooltip("Inventory Model")]
     public Inventory inventory;
 
     [Tooltip("Delivery UI root")]
     public GameObject uiRoot;
+
+    [Tooltip("Delivery Content View")]
+    public DeliveryContentView deliveryContentView;
 
     
     /* Sibling components */
@@ -39,7 +45,7 @@ public class DeliveryManager : SingletonManager<DeliveryManager>
     {
         uiRoot.SetActive(true);
         
-        DeliverNextOrder();
+        // play timeline that will show delivery and apply it
         director.Play();
     }
     
@@ -52,12 +58,24 @@ public class DeliveryManager : SingletonManager<DeliveryManager>
         }
     }
 
-    private void DeliverNextOrder()
+    public void AddDeliveryOrder(List<DeliveryOrder.SingleItemOrder> newItemOrders)
     {
-        DeliverOrder(deliveryOrder.ItemOrders);
+        nextDeliveryOrder.AddItemOrders(newItemOrders);
     }
     
-    public void DeliverOrder(List<DeliveryOrder.SingleItemOrder> itemOrders)
+    public void DeliverNextOrder()
+    {
+        // model
+        DeliverOrder(nextDeliveryOrder.ItemOrders);
+        
+        // view
+        deliveryContentView.UpdateText(nextDeliveryOrder.ItemOrders);
+        
+        // clear
+        nextDeliveryOrder.Clear();
+    }
+    
+    private void DeliverOrder(List<DeliveryOrder.SingleItemOrder> itemOrders)
     {
         foreach (var itemOrder in itemOrders)
         {
