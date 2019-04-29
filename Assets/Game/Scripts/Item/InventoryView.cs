@@ -41,7 +41,7 @@ public class InventoryView : MonoBehaviour
     /// if this game object has not been activated yet. So to allow disabling interactions
     /// early (when the first Delivery phase starts), we delay it to the next OnEnable
     /// by storing the state in a boolean.
-    private bool allowInteractions = false;
+    private bool allowInteractions = true;
 
     void Awake()
     {
@@ -53,7 +53,7 @@ public class InventoryView : MonoBehaviour
         model.ChangeEvent += OnInventoryChanged;
 
         // apply interaction flag now
-        canvasGroup.interactable = allowInteractions;
+        RefreshInteractableState();
     }
 
     void OnDisable()
@@ -103,10 +103,29 @@ public class InventoryView : MonoBehaviour
                 view.AssignModel(item);
             }
         }
+        
+        RefreshInteractableState();
     }
 
     public void SetAllowInteractions(bool allowInteractions)
     {
-        allowInteractions = allowInteractions;
+        this.allowInteractions = allowInteractions;
+
+        if (isActiveAndEnabled)
+        {
+            // we are already enabled on an active object, so we cannot count
+            // on the next OnEnable... refresh now. No need to use the double toggle trick either.
+            canvasGroup.interactable = allowInteractions;
+        }
+    }
+    
+    private void RefreshInteractableState()
+    {
+        // Ugly hack to refresh interaction state on new buttons that have just been added
+        // unfortunately they may flash to white then gray due to the state change
+        // to hide this we'll need to change the state under the hood (e.g. while Canvas Group alpha is still 0)
+        // Right now, they don't seem to flash.
+        canvasGroup.interactable = !allowInteractions;
+        canvasGroup.interactable = allowInteractions;
     }
 }

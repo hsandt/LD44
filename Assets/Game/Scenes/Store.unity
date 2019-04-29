@@ -2824,6 +2824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotPool: {fileID: 347004849}
   uiRoot: {fileID: 1515880422}
+  inventoryView: {fileID: 412137780}
 --- !u!1 &2059564882
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,9 @@ public class ItemSetupManager : SingletonManager<ItemSetupManager>
     [Tooltip("Item Setup UI root")]
     public GameObject uiRoot;
 
+    [Tooltip("Inventory View")]
+    public InventoryView inventoryView;
+
     void Init()
     {
         
@@ -27,6 +30,9 @@ public class ItemSetupManager : SingletonManager<ItemSetupManager>
     private void OnEnable()
     {
         uiRoot.SetActive(true);
+        
+        // you can place items now
+        inventoryView.SetAllowInteractions(true);
     }
     
     private void OnDisable()
@@ -36,6 +42,9 @@ public class ItemSetupManager : SingletonManager<ItemSetupManager>
         {
             uiRoot.SetActive(false);
         }
+        
+        // stop interactions until next time
+        inventoryView.SetAllowInteractions(false);
     }
 
     public void ExposeItemInNextFreeSlot(Item item)
