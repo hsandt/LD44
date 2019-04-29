@@ -49,6 +49,11 @@ public class ItemSetupManager : PhaseManager<ItemSetupManager>
             // stop interactions until next time
             inventoryView.SetAllowInteractions(false);
         }
+        
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.HideTutorial();
+        }
     }
 
     public void ExposeItemInNextFreeSlot(Item item)
