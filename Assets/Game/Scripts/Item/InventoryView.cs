@@ -81,6 +81,9 @@ public class InventoryView : MonoBehaviour
         
         // apply interaction flag now
         RefreshInteractableState();
+        
+        // important to avoid having dummy workshop items glitch in and out on first start
+        UpdateViewIfDirty();
     }
 
     void OnDisable()
@@ -116,6 +119,11 @@ public class InventoryView : MonoBehaviour
     }
 
     private void Update()
+    {
+        UpdateViewIfDirty();
+    }
+
+    private void UpdateViewIfDirty()
     {
         if (dirty)
         {

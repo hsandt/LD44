@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// Activate this script's game object in a Timeline to simulate Timeline signals (Unity 2019)
-public class DeliverNextOrderOnEnable : MonoBehaviour
+/// to show a tutorial by key
+public class ShowTutorialOnEnable : MonoBehaviour
 {
+    [SerializeField, Tooltip("Key of tutorial to show")]
+    private TutorialKey tutorialKey = TutorialKey.Welcome;
+    
     private void Awake()
     {
         // to avoid calling the event on an initial OnEnable if the game object starts
@@ -15,6 +20,6 @@ public class DeliverNextOrderOnEnable : MonoBehaviour
 
     void OnEnable()
     {
-        DeliveryManager.Instance.DeliverNextOrder();
+        TutorialManager.Instance.ShowTutorial(tutorialKey);
     }
 }

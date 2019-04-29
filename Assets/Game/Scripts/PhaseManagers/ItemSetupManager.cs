@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 using CommonsPattern;
 
@@ -18,24 +19,34 @@ public class ItemSetupManager : PhaseManager<ItemSetupManager>
     
     [Tooltip("Inventory View")]
     public InventoryView inventoryView;
+    
+    
+    /* Sibling components */
+    private PlayableDirector director;
+    
 
     protected override void OnEnableCallback()
     {
         base.OnEnableCallback();
 
-        if (inventoryView)
+        if (inventoryView != null)
         {
             // you can place items now
             inventoryView.SetAllowInteractions(true);
         }
+        
+        director.Play();
     }
-    
+
     protected override void OnDisableCallback()
     {
         base.OnDisableCallback();
 
-        // stop interactions until next time
-        inventoryView.SetAllowInteractions(false);
+        if (inventoryView != null)
+        {
+            // stop interactions until next time
+            inventoryView.SetAllowInteractions(false);
+        }
     }
 
     public void ExposeItemInNextFreeSlot(Item item)
