@@ -7,7 +7,7 @@ using UnityEngine;
 public class SlotPool : MonoBehaviour
 {
     [SerializeField, Tooltip("Array of item slots in the store")]
-    private Slot[] slots;
+    private Slot[] slots = {};
 
     public Slot GetNextFreeSlot()
     {

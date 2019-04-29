@@ -31,11 +31,10 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 57aea3f7ae3f7977bb73221079feddd9, type: 3}
-    totalSpriteSurfaceArea: 4954593
+    totalSpriteSurfaceArea: 2904568
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 2ddba812a8bf77b23b7639e321c66975, type: 3}
   - {fileID: 21300000, guid: f1f26832e4b29b7b5be60b21d0662a6f, type: 3}
   - {fileID: 21300000, guid: e520004394a48fe178dcd7cc8ce21fc5, type: 3}
   - {fileID: 21300000, guid: b17dc1531fa7cddfe91175de4faf48f9, type: 3}
@@ -44,7 +43,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 104a747fb04c2fcb283c94c9626ddaef, type: 3}
   - {fileID: 21300000, guid: 036b82afdde80dcba90c14030dd38948, type: 3}
   m_PackedSpriteNamesToIndex:
-  - Mockup_Store
   - SPR_Shelve1
   - SPR_Street
   - BG_Store

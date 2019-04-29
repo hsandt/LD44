@@ -53,8 +53,7 @@ public class ItemSetupManager : SingletonManager<ItemSetupManager>
 
     private void MoveItemToSlot(Item item, Slot slot)
     {
-        item.transform.position = slot.transform.position;
-        item.OnExposed(slot.Index);
+        item.OnExposed(slot);
         slot.CurrentItem = item;
     }
 }

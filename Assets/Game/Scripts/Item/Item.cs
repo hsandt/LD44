@@ -1,18 +1,30 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 using CommonsHelper;
 using JetBrains.Annotations;
 
-public class Item : MonoBehaviour
+[Serializable]
+public class Item
 {
-    public ItemData data;
+    public delegate void ExposeHandler(Slot slot);
+    public event ExposeHandler ExposeEvent;
     
-    [SerializeField, Tooltip("Do not modify in the inspector!"), ReadOnlyField]
+    
+    /* Parameters */
+    
+    private ItemData data;
+    
+    
+    /* State */
+    
+    [SerializeField, ReadOnlyField, Tooltip("Current state")]
     private ItemState state;
 
-    void Start()
+    public Item(ItemData data)
     {
-        
+        this.data = data;
+        state = new ItemState(0);
     }
 
     /// Expose this item in the next free slot available.
@@ -23,9 +35,10 @@ public class Item : MonoBehaviour
         ItemSetupManager.Instance.ExposeItemInNextFreeSlot(this);
     }
 
-    public void OnExposed(int slotIndex)
+    public void OnExposed(Slot slot)
     {
         state.exposed = true;
-        state.slotIndex = slotIndex;
+        state.slotIndex = slot.Index;
+        ExposeEvent?.Invoke(slot);
     }
 }

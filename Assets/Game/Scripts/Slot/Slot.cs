@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// This is at the same time the slot model and view
 public class Slot : MonoBehaviour
 {
     [SerializeField, Tooltip("Index of the slot. 0 for front slot.")]
