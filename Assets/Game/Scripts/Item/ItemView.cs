@@ -1,13 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+using CommonsHelper;
 
 using JetBrains.Annotations;
 
 public class ItemView : MonoBehaviour
 {
-    private Item model;
+    /* Sibling components */
+
+    private Button button;
     
+    
+    /* Parameters */
+    
+    private Item model;
+
+
+    void Awake()
+    {
+        button = this.GetComponentOrFail<Button>();
+    }
+
     /// Assign model and register view update callback
     /// Since OnEnable happens too early, on instantiation, we need to manually register the callback after assigning
     /// the new model
@@ -20,6 +36,12 @@ public class ItemView : MonoBehaviour
         }
         model = item;
         model.ExposeEvent += OnItemExposed;
+        
+        // prevent interactions when none in stock
+        if (model.Quantity == 0)
+        {
+            button.interactable = false;
+        }
     }
 
     void OnEnable()

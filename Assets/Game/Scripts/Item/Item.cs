@@ -21,12 +21,14 @@ public class Item
     [SerializeField, ReadOnlyField, Tooltip("Current state")]
     private ItemState state;
 
+    public int Quantity => state.quantity;
+    
     public Item(ItemData data)
     {
         this.data = data;
         state = new ItemState(0);
     }
-
+    
     /// Expose this item in the next free slot available.
     /// UB unless there is at least one free slot
     [UsedImplicitly]  // Button callback
