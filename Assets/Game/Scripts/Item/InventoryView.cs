@@ -7,14 +7,19 @@ using UnityEngine;
 public class InventoryView : MonoBehaviour
 {
     [Header("Asset references")]
+    
     [Tooltip("Item View Prefab")]
     public GameObject itemViewPrefab;
     
+    
     [Header("External scene references")]
+    
     [Tooltip("Inventory Model")]
     public Inventory model;
     
+    
     [Header("Child references")]
+    
     [Tooltip("Inventory Grid")]
     public Transform grid;
     

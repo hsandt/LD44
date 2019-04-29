@@ -11,6 +11,9 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
         Init();
     }
     
+    [Tooltip("Delivery Manager root")]
+    public GameObject deliveryManager;
+
     [Tooltip("Item Setup Manager root")]
     public GameObject itemSetupManager;
 
@@ -24,6 +27,8 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
     {
         switch (key)
         {
+            case PhaseKey.Delivery:
+                return deliveryManager;
             case PhaseKey.ItemSetup:
                 return itemSetupManager;
             case PhaseKey.AutoSales:
