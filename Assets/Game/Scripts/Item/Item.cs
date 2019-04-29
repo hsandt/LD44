@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 using CommonsHelper;
+using JetBrains.Annotations;
 
 public class Item : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class Item : MonoBehaviour
 
     /// Expose this item in the next free slot available.
     /// UB unless there is at least one free slot
-    void ExposeInNextFreeSlot()
+    [UsedImplicitly]  // Button callback
+    public void ExposeInNextFreeSlot()
     {
         ItemSetupManager.Instance.ExposeItemInNextFreeSlot(this);
     }

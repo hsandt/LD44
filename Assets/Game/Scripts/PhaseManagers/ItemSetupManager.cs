@@ -31,7 +31,11 @@ public class ItemSetupManager : SingletonManager<ItemSetupManager>
     
     private void OnDisable()
     {
-        uiRoot.SetActive(false);
+        // when stopping game in Editor, OnDisable is called but other objects may have been destroyed
+        if (uiRoot != null)
+        {
+            uiRoot.SetActive(false);
+        }
     }
 
     public void ExposeItemInNextFreeSlot(Item item)
@@ -40,7 +44,6 @@ public class ItemSetupManager : SingletonManager<ItemSetupManager>
         if (freeSlot != null)
         {
             MoveItemToSlot(item, freeSlot);
-            item.OnExposed(freeSlot.Index);
         }
         else
         {
@@ -51,5 +54,7 @@ public class ItemSetupManager : SingletonManager<ItemSetupManager>
     private void MoveItemToSlot(Item item, Slot slot)
     {
         item.transform.position = slot.transform.position;
+        item.OnExposed(slot.Index);
+        slot.CurrentItem = item;
     }
 }
