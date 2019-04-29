@@ -121,6 +121,8 @@ public class Tutorial : MonoBehaviour
                 break;
             case TutorialKey.ItemSetupPull:
                 break;
+            case TutorialKey.AutoSales:
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(key), key, null);
         }
@@ -143,6 +145,8 @@ public class Tutorial : MonoBehaviour
             case TutorialKey.ItemSetupFront:
                 break;
             case TutorialKey.ItemSetupPull:
+                break;
+            case TutorialKey.AutoSales:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(key), key, null);
