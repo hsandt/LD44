@@ -14,6 +14,9 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
     }
     
     [Tooltip("Delivery Manager root")]
+    public SessionManager sessionManager;
+
+    [Tooltip("Delivery Manager root")]
     public GameObject deliveryManager;
 
     [Tooltip("Item Setup Manager root")]
@@ -46,7 +49,7 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
         
     void Init () {
         DeactivateAllPhaseManagers();
-        SwitchToPhaseManager(PhaseKey.Delivery);
+//        SwitchToPhaseManager(PhaseKey.Delivery);
     }
 
     void Start ()
@@ -66,6 +69,15 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
             GameObject phaseManagerGO = GetManagerRoot(key);
             if (phaseManagerGO != null)
             {
+                // Since we are disable phase managers early to avoid OnEnable,
+                // at least we call init to register the singleton instances
+                // and load resources.
+                // Unfortunately, PhaseManager<T> cannot be obtained as a generic,
+                // so we must use that ugly reflection call.
+                // The alternative is to force SEO of all phase managers *before*
+                // the Phase Switcher, and ask them to deactivate themselves on Awake
+                // just before the call to OnEnable.
+                phaseManagerGO.SendMessage("Init");
                 phaseManagerGO.SetActive(false);
             }
         }

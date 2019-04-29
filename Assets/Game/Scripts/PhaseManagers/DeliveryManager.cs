@@ -8,13 +8,15 @@ using CommonsPattern;
 using TMPro;
 using UnityEngine.Serialization;
 
-public class DeliveryManager : SingletonManager<DeliveryManager>
+public class DeliveryManager : PhaseManager<DeliveryManager>
 {
     protected DeliveryManager () {}
 
-    void Awake () {
+    public override void Init()
+    {
         SetInstanceOrSelfDestruct(this);
-        Init();
+        
+        director = this.GetComponentOrFail<PlayableDirector>();
     }
     
     [FormerlySerializedAs("deliveryOrder")]
@@ -26,9 +28,6 @@ public class DeliveryManager : SingletonManager<DeliveryManager>
     [Tooltip("Inventory Model")]
     public Inventory inventory;
 
-    [Tooltip("Delivery UI root")]
-    public GameObject uiRoot;
-
     [Tooltip("Inventory View")]
     public InventoryView inventoryView;
 
@@ -36,14 +35,9 @@ public class DeliveryManager : SingletonManager<DeliveryManager>
     /* Sibling components */
     private PlayableDirector director;
     
-    void Init()
+    protected override void OnEnableCallback()
     {
-        director = this.GetComponentOrFail<PlayableDirector>();
-    }
-
-    private void OnEnable()
-    {
-        uiRoot.SetActive(true);
+        base.OnEnableCallback();
         
         // don't allow touching the inventory yet
         inventoryView.SetAllowInteractions(false);
@@ -52,13 +46,12 @@ public class DeliveryManager : SingletonManager<DeliveryManager>
         director.Play();
     }
     
-    private void OnDisable()
+    protected override void OnDisableCallback()
     {
-        // when stopping game in Editor, OnDisable is called but other objects may have been destroyed
-        if (uiRoot != null)
-        {
-            uiRoot.SetActive(false);
-        }
+        base.OnDisableCallback();
+
+        // stop interactions until next time
+        inventoryView.SetAllowInteractions(false);
     }
 
     public void AddDeliveryOrder(List<DeliveryOrder.SingleItemOrder> newItemOrders)

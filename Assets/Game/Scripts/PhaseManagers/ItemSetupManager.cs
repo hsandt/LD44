@@ -4,45 +4,33 @@ using UnityEngine;
 
 using CommonsPattern;
 
-public class ItemSetupManager : SingletonManager<ItemSetupManager>
+public class ItemSetupManager : PhaseManager<ItemSetupManager>
 {
     protected ItemSetupManager () {}
 
-    void Awake () {
+    public override void Init()
+    {
         SetInstanceOrSelfDestruct(this);
-        Init();
     }
 
     [Tooltip("Slot pool")]
     public SlotPool slotPool;
     
-    [Tooltip("Item Setup UI root")]
-    public GameObject uiRoot;
-
     [Tooltip("Inventory View")]
     public InventoryView inventoryView;
 
-    void Init()
+    protected override void OnEnableCallback()
     {
-        
-    }
-
-    private void OnEnable()
-    {
-        uiRoot.SetActive(true);
+        base.OnEnableCallback();
         
         // you can place items now
         inventoryView.SetAllowInteractions(true);
     }
     
-    private void OnDisable()
+    protected override void OnDisableCallback()
     {
-        // when stopping game in Editor, OnDisable is called but other objects may have been destroyed
-        if (uiRoot != null)
-        {
-            uiRoot.SetActive(false);
-        }
-        
+        base.OnDisableCallback();
+
         // stop interactions until next time
         inventoryView.SetAllowInteractions(false);
     }
