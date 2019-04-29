@@ -152,4 +152,20 @@ public class Tutorial : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(key), key, null);
         }
     }
+    
+    public void OnExposedItem()
+    {
+        if (currentTutorialKey == TutorialKey.ItemSetup || currentTutorialKey == TutorialKey.ItemSetupFront)
+        {
+            deliveryDirector.Resume();
+        }
+    }
+
+    public void OnPulledBackItem()
+    {
+        if (currentTutorialKey == TutorialKey.ItemSetupPull)
+        {
+            deliveryDirector.Resume();
+        }
+    }
 }

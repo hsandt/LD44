@@ -27,6 +27,14 @@ public class ItemSetupManager : PhaseManager<ItemSetupManager>
     private PlayableDirector director;
     
 
+    // we use static here just to make it easier to register callbacks in OnEnable
+    // without fearing that the Singleton Instance has not been registered yet
+    public delegate void ExposeItemHandler();
+    public static event ExposeItemHandler ExposeItemEvent;
+    
+    public delegate void PullBackItemHandler();
+    public static event PullBackItemHandler PullBackItemEvent;
+    
     protected override void OnEnableCallback()
     {
         base.OnEnableCallback();
@@ -68,6 +76,8 @@ public class ItemSetupManager : PhaseManager<ItemSetupManager>
             // updated (if we were using clone of the Item View in the slot and graying out the
             // item view in the inventory grid, then we would to update either the whole inventory grid
             // or at least the item view in the inventory separately)
+
+            OnExposedItem();
         }
         else
         {
@@ -82,5 +92,17 @@ public class ItemSetupManager : PhaseManager<ItemSetupManager>
         
         // exceptionally, we do not call Inventory.OnChanged because the Item View will take care
         // of moving the sprite back to the grid
+
+        OnPulledBackItem();
+    }
+
+    protected virtual void OnExposedItem()
+    {
+        ExposeItemEvent?.Invoke();
+    }
+
+    protected virtual void OnPulledBackItem()
+    {
+        PullBackItemEvent?.Invoke();
     }
 }
