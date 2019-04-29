@@ -22,7 +22,8 @@ public class DeliveryContentView : MonoBehaviour
             StringBuilder sb = new StringBuilder();
             foreach (var itemOrder in order)
             {
-                sb.AppendFormat("{0}\t{1}", itemOrder.itemData.itemName, itemOrder.quantity);
+                sb.AppendFormat("{0}\t+{1}", itemOrder.itemData.itemName, itemOrder.quantity);
+                sb.AppendLine();
             }
             content.text = sb.ToString();
         }
