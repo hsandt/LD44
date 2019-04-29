@@ -50,8 +50,11 @@ public class DeliveryManager : PhaseManager<DeliveryManager>
     {
         base.OnDisableCallback();
 
-        // stop interactions until next time
-        inventoryView.SetAllowInteractions(false);
+        if (inventoryView != null)
+        {
+            // stop interactions until next time
+            inventoryView.SetAllowInteractions(false);
+        }
     }
 
     public void AddDeliveryOrder(List<DeliveryOrder.SingleItemOrder> newItemOrders)

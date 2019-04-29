@@ -49,11 +49,11 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
         
     void Init () {
         DeactivateAllPhaseManagers();
-//        SwitchToPhaseManager(PhaseKey.Delivery);
     }
 
-    void Start ()
+    public void OnStartGameSession ()
     {
+        SwitchToPhaseManager(PhaseKey.Delivery);
     }
 
     void FixedUpdate () {
@@ -77,10 +77,12 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
                 // The alternative is to force SEO of all phase managers *before*
                 // the Phase Switcher, and ask them to deactivate themselves on Awake
                 // just before the call to OnEnable.
-                phaseManagerGO.SendMessage("Init");
+                // Use TryInit to avoid initializing twice.
+                phaseManagerGO.SendMessage("TryInit");
                 phaseManagerGO.SetActive(false);
             }
         }
+        Debug.Log("[PhaseSwitcher] Deactivated all phase managers");
     }
 
     [EnumAction(typeof(PhaseKey))]
@@ -95,12 +97,14 @@ public class PhaseSwitcher : SingletonManager<PhaseSwitcher>
         if (currentPhaseManager != null)
         {
             currentPhaseManager.SetActive(false);
+            Debug.LogFormat(currentPhaseManager, "[PhaseSwitcher] Deactivated previous phase managers {0}", currentPhaseManager);
         }
 
         currentPhaseManager = GetManagerRoot(key);
         if (currentPhaseManager != null)
         {
             currentPhaseManager.SetActive(true);
+            Debug.LogFormat(currentPhaseManager, "[PhaseSwitcher] Activated new phase managers {0}", currentPhaseManager);
         }
     }
 }

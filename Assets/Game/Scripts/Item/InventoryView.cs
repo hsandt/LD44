@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CommonsHelper;
 using UnityEngine;
+using UnityEngine.UI;
+
+using CommonsHelper;
 
 public class InventoryView : MonoBehaviour
 {
@@ -23,10 +25,28 @@ public class InventoryView : MonoBehaviour
     [Tooltip("Inventory Grid")]
     public Transform grid;
     
+    RectTransform gridRectTr;
     
     /* Sibling components */
 
     private CanvasGroup canvasGroup;
+    
+    
+    /* Parameters */
+    
+    [SerializeField, Tooltip("How much in ratio do the grid cells try to occupy the grid layout horizontally? " +
+                             "(Minimum of width/height will be chosen)")]
+    private float horizontalCellSizeRatio = 0.75f;
+    
+    [SerializeField, Tooltip("How much in ratio do the grid cells try to occupy the grid layout vertically? " +
+                             "(Minimum of width/height will be chosen)")]
+    private float verticalCellSizeRatio = 0.75f;
+
+    [SerializeField, Tooltip("Max number of items displayed per row")]
+    private int maxCellsPerRow = 8;
+    
+    [SerializeField, Tooltip("Max number of items displayed per column")]
+    private int maxCellsPerColumn = 1;
     
     
     /* State */
@@ -46,12 +66,19 @@ public class InventoryView : MonoBehaviour
     void Awake()
     {
         canvasGroup = this.GetComponentOrFail<CanvasGroup>();
+        gridRectTr = grid.GetComponentOrFail<RectTransform>();
     }
     
     void OnEnable()
     {
         model.ChangeEvent += OnInventoryChanged;
-
+        
+        // Possible improvement:
+        // register to grid layout resize event (ResizeEventHandler) to update cell size accordingly,
+        // otherwise grid elements will appear too big at low resolutions
+        // However, this is only to support window resizing which is currently disabled in the project.
+        // So for now, computing the right Grid cell size on start should be enough.
+        
         // apply interaction flag now
         RefreshInteractableState();
     }
@@ -69,6 +96,23 @@ public class InventoryView : MonoBehaviour
         // do not update view immediately, as it would be expensive if items are added
         // inside a loop
         dirty = true;
+    }
+
+    void Start()
+    {
+        // window resize is currently disabled in project, so updating on start is enough
+        // otherwise, we'd have to register to GetComponent<ResizeEventHandler>().UIResizeEvent to update too
+        UpdateCellSize();
+    }
+
+    private void UpdateCellSize()
+    {
+        float cellMaxWidth = gridRectTr.rect.width * horizontalCellSizeRatio / maxCellsPerRow;
+        float cellMaxHeight = gridRectTr.rect.height * verticalCellSizeRatio / maxCellsPerColumn;
+        // Ex: at 1080p, grid height = 264 -> cell max height = 200
+        float cellDimension = Mathf.Min(cellMaxWidth, cellMaxHeight);  // fit in both directions
+        
+        grid.GetComponentOrFail<GridLayoutGroup>().cellSize = new Vector2(cellDimension, cellDimension);
     }
 
     private void Update()

@@ -22,9 +22,12 @@ public class ItemSetupManager : PhaseManager<ItemSetupManager>
     protected override void OnEnableCallback()
     {
         base.OnEnableCallback();
-        
-        // you can place items now
-        inventoryView.SetAllowInteractions(true);
+
+        if (inventoryView)
+        {
+            // you can place items now
+            inventoryView.SetAllowInteractions(true);
+        }
     }
     
     protected override void OnDisableCallback()

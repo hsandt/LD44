@@ -17,10 +17,26 @@ public abstract class PhaseManager<T> : SingletonManager<T> where T : PhaseManag
     
     */
 
+    private bool initialized = false;
+    
     void Awake () {
-        Init();
+        TryInit();
     }
 
+    private void TryInit()
+    {
+        if (!initialized)
+        {
+            // if the script does not call OnEnable before being disabled
+            // by the PhaseSwitcher, it does not call OnDisable either,
+            // so call it manually to make sure you hide UI on Start
+            OnDisableCallback();
+            Init();
+            initialized = true;
+        }
+    }
+
+    // Actually called via SendMessage, so public is not really used
     public abstract void Init();
     
     [Tooltip("Item Setup UI root")]
