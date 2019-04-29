@@ -366,7 +366,7 @@ PrefabInstance:
     - target: {fileID: 8099517280201679881, guid: 2e633d73039ae320bacf43919fdb2dcb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8099517280201679881, guid: 2e633d73039ae320bacf43919fdb2dcb,
         type: 3}
@@ -527,6 +527,7 @@ GameObject:
   - component: {fileID: 412137777}
   - component: {fileID: 412137779}
   - component: {fileID: 412137778}
+  - component: {fileID: 412137781}
   - component: {fileID: 412137780}
   m_Layer: 0
   m_Name: InventoryView
@@ -608,6 +609,18 @@ MonoBehaviour:
     type: 3}
   model: {fileID: 734131095}
   grid: {fileID: 2134756609}
+--- !u!225 &412137781
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412137776}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &501588680
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,6 +928,8 @@ PlayableDirector:
     value: {fileID: 2059564882}
   - key: {fileID: 114159591982021628, guid: 10b529a355073ff4ab99741f4f9070d5, type: 2}
     value: {fileID: 1075317250}
+  - key: {fileID: 114789035903987492, guid: 10b529a355073ff4ab99741f4f9070d5, type: 2}
+    value: {fileID: 412137776}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &540851254
@@ -932,7 +947,7 @@ MonoBehaviour:
   nextDeliveryOrder: {fileID: 66631624}
   inventory: {fileID: 734131095}
   uiRoot: {fileID: 1476053481}
-  deliveryContentView: {fileID: 586941506}
+  inventoryView: {fileID: 412137780}
 --- !u!1001 &577431181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1077,7 +1092,7 @@ GameObject:
   - component: {fileID: 586941503}
   - component: {fileID: 586941506}
   m_Layer: 0
-  m_Name: Delivery Panel
+  m_Name: Delivery Content View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -29,8 +29,8 @@ public class DeliveryManager : SingletonManager<DeliveryManager>
     [Tooltip("Delivery UI root")]
     public GameObject uiRoot;
 
-    [Tooltip("Delivery Content View")]
-    public DeliveryContentView deliveryContentView;
+    [Tooltip("Inventory View")]
+    public InventoryView inventoryView;
 
     
     /* Sibling components */
@@ -44,6 +44,9 @@ public class DeliveryManager : SingletonManager<DeliveryManager>
     private void OnEnable()
     {
         uiRoot.SetActive(true);
+        
+        // don't allow touching the inventory yet
+        inventoryView.SetAllowInteractions(false);
         
         // play timeline that will show delivery and apply it
         director.Play();

@@ -24,6 +24,11 @@ public class InventoryView : MonoBehaviour
     public Transform grid;
     
     
+    /* Sibling components */
+
+    private CanvasGroup canvasGroup;
+    
+    
     /* State */
     
     /// Should we refresh the view?
@@ -31,10 +36,24 @@ public class InventoryView : MonoBehaviour
     /// starts with some workshop items that shouldn't be in the final game, everything
     /// will be cleaned up in time.
     private bool dirty = true;
+
+    /// The interactable field of CanvasGroup only applies to children
+    /// if this game object has not been activated yet. So to allow disabling interactions
+    /// early (when the first Delivery phase starts), we delay it to the next OnEnable
+    /// by storing the state in a boolean.
+    private bool allowInteractions = false;
+
+    void Awake()
+    {
+        canvasGroup = this.GetComponentOrFail<CanvasGroup>();
+    }
     
     void OnEnable()
     {
         model.ChangeEvent += OnInventoryChanged;
+
+        // apply interaction flag now
+        canvasGroup.interactable = allowInteractions;
     }
 
     void OnDisable()
@@ -84,5 +103,10 @@ public class InventoryView : MonoBehaviour
                 view.AssignModel(item);
             }
         }
+    }
+
+    public void SetAllowInteractions(bool allowInteractions)
+    {
+        allowInteractions = allowInteractions;
     }
 }
