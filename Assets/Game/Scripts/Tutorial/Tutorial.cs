@@ -50,9 +50,6 @@ public class Tutorial : MonoBehaviour
     [Tooltip("For tutorial that require a click on Continue, the Continue button must be displayed")]
     public Button buttonContinue;
     
-    [Tooltip("Button Open Store to disable until ready")]
-    public Button buttonOpenStore;
-    
     [Tooltip("Playable during delivery to pause for explanations")]
     public PlayableDirector deliveryDirector;
 
@@ -119,7 +116,6 @@ public class Tutorial : MonoBehaviour
             case TutorialKey.MorningDeliveryDone:
                 break;
             case TutorialKey.ItemSetup:
-                buttonOpenStore.interactable = false;
                 break;
             case TutorialKey.ItemSetupFront:
                 break;

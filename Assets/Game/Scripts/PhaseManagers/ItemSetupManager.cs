@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-using CommonsPattern;
+using CommonsHelper;
 
 public class ItemSetupManager : PhaseManager<ItemSetupManager>
 {
@@ -12,6 +12,8 @@ public class ItemSetupManager : PhaseManager<ItemSetupManager>
     public override void Init()
     {
         SetInstanceOrSelfDestruct(this);
+        
+        director = this.GetComponentOrFail<PlayableDirector>();
     }
 
     [Tooltip("Slot pool")]
