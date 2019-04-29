@@ -65,13 +65,7 @@ public class DeliveryManager : SingletonManager<DeliveryManager>
     
     public void DeliverNextOrder()
     {
-        // model
         DeliverOrder(nextDeliveryOrder.ItemOrders);
-        
-        // view
-        deliveryContentView.UpdateText(nextDeliveryOrder.ItemOrders);
-        
-        // clear
         nextDeliveryOrder.Clear();
     }
     

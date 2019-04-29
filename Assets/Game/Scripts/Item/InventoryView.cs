@@ -26,7 +26,11 @@ public class InventoryView : MonoBehaviour
     
     /* State */
     
-    private bool dirty = false;
+    /// Should we refresh the view?
+    /// Start true, so even if inventory view is enabled late, or if the inventory
+    /// starts with some workshop items that shouldn't be in the final game, everything
+    /// will be cleaned up in time.
+    private bool dirty = true;
     
     void OnEnable()
     {
@@ -70,12 +74,13 @@ public class InventoryView : MonoBehaviour
             Destroy(oldItemTr.gameObject);
         }
         
-        // fill grid layout with all items with non-0 quantity
+        // fill grid layout with all non-exposed items with non-0 quantity
         foreach (Item item in model.Items)
         {
-            if (item.Quantity > 0)
+            if (item.Quantity > 0 && !item.Exposed)
             {
                 ItemView view = itemViewPrefab.InstantiateUnder(grid).GetComponentOrFail<ItemView>();
+                view.SetInventoryView(this);
                 view.AssignModel(item);
             }
         }

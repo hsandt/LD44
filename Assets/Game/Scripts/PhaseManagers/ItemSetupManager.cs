@@ -43,7 +43,13 @@ public class ItemSetupManager : SingletonManager<ItemSetupManager>
         Slot freeSlot = slotPool.GetNextFreeSlot();
         if (freeSlot != null)
         {
-            MoveItemToSlot(item, freeSlot);
+            item.ExposeInSlot(freeSlot);
+            
+            // exceptionally, do not call Inventory.OnChanged because the Item View will take care
+            // of moving the sprite to the target slot, so the inventory grid doesn't need to be
+            // updated (if we were using clone of the Item View in the slot and graying out the
+            // item view in the inventory grid, then we would to update either the whole inventory grid
+            // or at least the item view in the inventory separately)
         }
         else
         {
@@ -51,9 +57,12 @@ public class ItemSetupManager : SingletonManager<ItemSetupManager>
         }
     }
 
-    private void MoveItemToSlot(Item item, Slot slot)
+    public void PullBackToInventory(Item item)
     {
-        item.OnExposed(slot);
-        slot.CurrentItem = item;
+        Slot originalSlot = slotPool.GetSlotAt(item.SlotIndex);
+        item.PullBackFromSlot(originalSlot);
+        
+        // exceptionally, we do not call Inventory.OnChanged because the Item View will take care
+        // of moving the sprite back to the grid
     }
 }

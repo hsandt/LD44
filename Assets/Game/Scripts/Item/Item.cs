@@ -10,6 +10,9 @@ public class Item
     public delegate void ExposeHandler(Slot slot);
     public event ExposeHandler ExposeEvent;
     
+    public delegate void PullBackHandler();
+    public event PullBackHandler PullBackEvent;
+    
     
     /* Parameters */
     
@@ -24,6 +27,8 @@ public class Item
 
     
     public int Quantity => state.quantity;
+    public bool Exposed => state.exposed;
+    public int SlotIndex => state.slotIndex;
 
     public Item(ItemData data)
     {
@@ -36,18 +41,28 @@ public class Item
         state.quantity += addedQuantity;
     }
     
-    /// Expose this item in the next free slot available.
-    /// UB unless there is at least one free slot
-    [UsedImplicitly]  // Button callback
     public void ExposeInNextFreeSlot()
     {
         ItemSetupManager.Instance.ExposeItemInNextFreeSlot(this);
     }
 
-    public void OnExposed(Slot slot)
+    public void ExposeInSlot(Slot slot)
     {
         state.exposed = true;
         state.slotIndex = slot.Index;
+        
+        slot.CurrentItem = this;
+        
         ExposeEvent?.Invoke(slot);
+    }
+    
+    public void PullBackFromSlot(Slot slot)
+    {
+        state.exposed = false;
+        state.slotIndex = -1;
+        
+        slot.CurrentItem = null;
+
+        PullBackEvent?.Invoke();
     }
 }

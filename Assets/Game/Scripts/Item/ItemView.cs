@@ -9,10 +9,10 @@ using JetBrains.Annotations;
 
 public class ItemView : MonoBehaviour
 {
-    /* Sibling components */
-
-    private Button button;
+    /* External scene references (injected) */
     
+    private InventoryView inventoryView;
+
     
     /* Parameters */
     
@@ -21,7 +21,11 @@ public class ItemView : MonoBehaviour
 
     void Awake()
     {
-        button = this.GetComponentOrFail<Button>();
+    }
+
+    public void SetInventoryView(InventoryView inventoryView)
+    {
+        this.inventoryView = inventoryView;
     }
 
     /// Assign model and register view update callback
@@ -29,23 +33,25 @@ public class ItemView : MonoBehaviour
     /// the new model
     public void AssignModel(Item item)
     {
-        if (model != null)
-        {
-            // unregister from old model (useful when pooling item views)
-            model.ExposeEvent -= OnItemExposed;
-        }
+        // unregister from old model (useful when pooling item views)
+        TryUnregisterFromModelEvents();
+
         model = item;
-        model.ExposeEvent += OnItemExposed;
         
-        // prevent interactions when none in stock
-        // for now we don't display such items anyway
-//        if (model.Quantity == 0)
-//        {
-//            button.interactable = false;
-//        }
+        TryRegisterToModelEvents();
     }
 
     void OnEnable()
+    {
+        TryRegisterToModelEvents();
+    }
+
+    void OnDisable()
+    {
+        TryUnregisterFromModelEvents();
+    }
+
+    private void TryRegisterToModelEvents()
     {
         // When instantiated from Item View prefab, OnEnable will be called immediately, but the model isn't set yet
         // at this moment, so check for null. The code is still useful to re-register to model changes later,
@@ -53,26 +59,57 @@ public class ItemView : MonoBehaviour
         if (model != null)
         {
             model.ExposeEvent += OnItemExposed;
+            model.PullBackEvent += OnItemPulledBack;
         }
     }
-
-    void OnDisable()
+    private void TryUnregisterFromModelEvents()
     {
         if (model != null)
         {
             model.ExposeEvent -= OnItemExposed;
+            model.PullBackEvent -= OnItemPulledBack;
         }
     }
 
     private void OnItemExposed(Slot slot)
     {
-        transform.position = slot.transform.position;
+        // detach from grid parent, reparent to slot at relative position 0 to match center
+        transform.SetParent(slot.transform, false);
+        transform.localPosition = Vector3.zero;
     }
 
+    private void OnItemPulledBack()
+    {
+        // reparent to grid, let the layout reposition correctly
+        // (item will be replaced at the end of the grid!)
+        transform.SetParent(inventoryView.grid, false);
+    }
+
+    [UsedImplicitly]  // Button callback
+    public void OnButtonAction()
+    {
+        // if inside the inventory, expose
+        // if exposed, pull back to the inventory
+
+        if (model.Exposed)
+        {
+            PullBackToInventory();
+        }
+        else
+        {
+            ExposeInNextFreeSlot();
+        }
+    }
+
+    /// Remove item from exposition
+    private void PullBackToInventory()
+    {
+        ItemSetupManager.Instance.PullBackToInventory(model);
+    }
+    
     /// Expose this item in the next free slot available.
     /// UB unless there is at least one free slot
-    [UsedImplicitly]  // Button callback
-    public void ExposeInNextFreeSlot()
+    private void ExposeInNextFreeSlot()
     {
         ItemSetupManager.Instance.ExposeItemInNextFreeSlot(model);
     }

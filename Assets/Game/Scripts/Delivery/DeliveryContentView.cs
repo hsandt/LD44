@@ -12,8 +12,16 @@ public class DeliveryContentView : MonoBehaviour
     [Tooltip("Actual delivery content details")]
 
     public TextMeshProUGUI content;
-    
-    public void UpdateText(List<DeliveryOrder.SingleItemOrder> order)
+
+    void OnEnable()
+    {
+        // update text now; we don't even need an event that marks this view as dirty
+        // when DeliverManager.Instance.nextDeliveryOrder changes, since this can only happen
+        // during the SessionManage init and the Order phase, in which this view is inactive
+        UpdateText(DeliveryManager.Instance.nextDeliveryOrder.ItemOrders);
+    }
+
+    private void UpdateText(List<DeliveryOrder.SingleItemOrder> order)
     {
         if (order.Count > 0)
         {
