@@ -14,6 +14,7 @@ public enum TutorialKey
     ItemSetup,
     ItemSetupFront,
     ItemSetupPull,
+    ItemSetupReady,
     AutoSales,
 }
 
@@ -40,8 +41,10 @@ public class Tutorial : MonoBehaviour
         "Good! The item just behind the glass in the Front Display item. " +
         "Depending on its nature, it will attract certain types of customers, so try different ones!",
         // ItemSetupPull
-        "You can also click on items placed on slots to pull them back to the inventory. " +
-        "When you're ready, click on <i>Open Store</i>",
+        "You can also click on items placed on slots to pull them back to the inventory. ",
+        // ItemSetupReady
+        "That's it. Note that the free slots are automatically filled in order, starting with the Front Display. " +
+        "When you're ready, click on <i>Open Store</i> to continue.",
         // AutoSales
         "Well, the developer didn't have enough time to make the next phase, " +
         "so this is the end of this tutorial and of this demo. Thank you for playing!"
@@ -116,10 +119,15 @@ public class Tutorial : MonoBehaviour
             case TutorialKey.MorningDeliveryDone:
                 break;
             case TutorialKey.ItemSetup:
+                itemSetupDirector.Pause();
                 break;
             case TutorialKey.ItemSetupFront:
+                itemSetupDirector.Pause();
                 break;
             case TutorialKey.ItemSetupPull:
+                itemSetupDirector.Pause();
+                break;
+            case TutorialKey.ItemSetupReady:
                 break;
             case TutorialKey.AutoSales:
                 break;
@@ -146,6 +154,8 @@ public class Tutorial : MonoBehaviour
                 break;
             case TutorialKey.ItemSetupPull:
                 break;
+            case TutorialKey.ItemSetupReady:
+                break;
             case TutorialKey.AutoSales:
                 break;
             default:
@@ -157,7 +167,8 @@ public class Tutorial : MonoBehaviour
     {
         if (currentTutorialKey == TutorialKey.ItemSetup || currentTutorialKey == TutorialKey.ItemSetupFront)
         {
-            deliveryDirector.Resume();
+            HideSelfTutorial();
+            itemSetupDirector.Resume();
         }
     }
 
@@ -165,7 +176,8 @@ public class Tutorial : MonoBehaviour
     {
         if (currentTutorialKey == TutorialKey.ItemSetupPull)
         {
-            deliveryDirector.Resume();
+            HideSelfTutorial();
+            itemSetupDirector.Resume();
         }
     }
 }

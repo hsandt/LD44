@@ -102,7 +102,8 @@ MonoBehaviour:
   - Good! The item just behind the glass in the Front Display item. Depending on its
     nature, it will attract certain types of customers, so try different ones!
   - You can also click on items placed on slots to pull them back to the inventory.
-    When you're ready, click on <i>Open Store</i>
+  - That's it. Note that the free slots are automatically filled in order, starting
+    with the Front Display. When you're ready, click on <i>Open Store</i> to continue.
   - Well, the developer didn't have enough time to make the next phase, so this is
     the end of this tutorial and demo. Thank you for playing!
   buttonContinue: {fileID: 1875950068476038742}
@@ -205,7 +206,7 @@ MonoBehaviour:
   m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 20
+  m_fontSizeMin: 18
   m_fontSizeMax: 50
   m_fontStyle: 0
   m_textAlignment: 257
