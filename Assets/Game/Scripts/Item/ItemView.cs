@@ -9,6 +9,9 @@ using JetBrains.Annotations;
 
 public class ItemView : MonoBehaviour
 {
+    [Tooltip("Item sprite")]
+    public Image itemPicture;
+    
     /* External scene references (injected) */
     
     private InventoryView inventoryView;
@@ -37,8 +40,14 @@ public class ItemView : MonoBehaviour
         TryUnregisterFromModelEvents();
 
         model = item;
+        SetupViewFromModel();        
         
         TryRegisterToModelEvents();
+    }
+
+    private void SetupViewFromModel()
+    {
+        itemPicture.sprite = model.Data.sprite;
     }
 
     void OnEnable()

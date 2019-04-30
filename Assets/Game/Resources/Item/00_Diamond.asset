@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2331625c2a2c287b091294b9c6b784fe, type: 3}
-  m_Name: 00_Mock 1
+  m_Name: 00_Diamond
   m_EditorClassIdentifier: 
-  itemName: Mock 1
-  description: A Mock 1
+  itemName: Diamond
+  description: A Diamond
+  sprite: {fileID: 21300000, guid: fac7204e8db3976bb802055061b3f0e3, type: 3}
